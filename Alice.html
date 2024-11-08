@@ -1,0 +1,100 @@
+<<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parabéns, Alice!</title>
+  <style>
+    /* Estilos gerais */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #1a1a1a;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff79c6;
+    }
+
+    /* Botão de Parabéns */
+    #parabens-btn {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      animation: colorCycle 1s infinite;
+    }
+
+    /* Animação de piscar em várias cores */
+    @keyframes colorCycle {
+      0% { background-color: #ff79c6; color: #ffffff; }
+      25% { background-color: #8be9fd; color: #1a1a1a; }
+      50% { background-color: #bd93f9; color: #ffffff; }
+      75% { background-color: #ffb86c; color: #1a1a1a; }
+      100% { background-color: #50fa7b; color: #ffffff; }
+    }
+
+    /* Fogos de artifício */
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #bd93f9;
+      opacity: 0;
+      pointer-events: none;
+      animation: explode 1s ease-out forwards;
+    }
+
+    /* Animação dos fogos de artifício */
+    @keyframes explode {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(3) translateY(-200px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Texto principal -->
+  <h1>PARABÉNS ALICE!</h1>
+  <!-- Botão para ativar os fogos -->
+  <button id="parabens-btn">Parabéns</button>
+
+  <script>
+    const btn = document.getElementById('parabens-btn');
+
+    // Função que cria os fogos de artifício
+    function createFireworks() {
+      for (let i = 0; i < 30; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
+        firework.style.left = `${Math.random() * window.innerWidth}px`;
+        firework.style.top = `${Math.random() * window.innerHeight}px`;
+        firework.style.animationDelay = `${Math.random() * 0.5}s`;
+
+        document.body.appendChild(firework);
+
+        // Remover o fogo de artifício após a animação terminar
+        firework.addEventListener('animationend', () => {
+          firework.remove();
+        });
+      }
+    }
+
+    // Adicionar evento ao botão
+    btn.addEventListener('click', createFireworks);
+  </script>
+</body>
+</html>
+
